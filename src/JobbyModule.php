@@ -7,6 +7,7 @@
  */
 namespace jobbyDb;
 
+use jobbyDb\model\MongoDbModel;
 use yii\base\Module;
 
 /**
@@ -17,13 +18,20 @@ use yii\base\Module;
  */
 class JobbyModule extends Module
 {
-    public $controllerNamespace = '\\jobbyDb';
+    public $controllerNamespace = '\jobbyDb\controller';
     public $defaultRoute = 'jobby';
+
+    /** @var string Class of the ActiveRecord model used to hold scheduled tasks */
     public $modelClass;
 
+    /**
+     * Sets the default values by expressions
+     */
     public function init()
     {
         parent::init();
-        $this->modelClass = JobbyModel::className();
+        if (! $this->modelClass) {
+            $this->modelClass = MongoDbModel::className();
+        }
     }
 }

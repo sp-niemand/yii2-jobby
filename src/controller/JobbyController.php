@@ -5,9 +5,10 @@
  * @package jobbyDb
  * @author Dmitri Cherepovski <codernumber1@gmail.com>
  */
-namespace jobbyDb;
+namespace jobbyDb\controller;
 
 use Jobby\Jobby;
+use jobbyDb\model\JobbyModelInterface;
 use yii\console\Controller;
 
 /**
@@ -26,18 +27,17 @@ class JobbyController extends Controller
     public function actionRun()
     {
         $jobby = new Jobby();
-        $query = [
-            'enabled' => true,
-            'host' => ['$in' => ['', gethostname()]],
-        ];
-        $tasks = JobbyModel::findAll($query);
-        /** @var JobbyModel[] $tasks */
+
+        $modelClass = $this->module->modelClass;
+        /** @var JobbyModelInterface $modelClass */
+        $tasks = $modelClass::findAllToRun();
         foreach ($tasks as $task) {
+            $output = $task->getJobbyOutput();
             $jobby->add($task->getPrimaryKey(), [
-                'command'  => $task->command,
-                'schedule' => $task->schedule,
-                'output'   => $task->output ? $task->output : null,
-                'enabled'  => $task->enabled,
+                'command'  => $task->getJobbyCommand(),
+                'schedule' => $task->getJobbySchedule(),
+                'output'   => $output ? $output : null,
+                'enabled'  => $task->getJobbyEnabled(),
                 // Debug mode
                 'debug'  => false,
             ]);

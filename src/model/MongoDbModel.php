@@ -5,12 +5,12 @@
  * @package jobbyDb
  * @author Dmitri Cherepovski <codernumber1@gmail.com>
  */
-namespace jobbyDb;
+namespace jobbyDb\model;
 
 use MGC\Core\General\ActiveRecord;
 
 /**
- * Scheduler task model
+ * Jobby task model for MongoDb
  *
  * @package jobbyDb
  * @author Dmitri Cherepovski <codernumber1@gmail.com>
@@ -23,7 +23,7 @@ use MGC\Core\General\ActiveRecord;
  * @property string $command
  * @property string $output
  */
-class JobbyModel extends ActiveRecord
+class MongoDbModel extends ActiveRecord implements JobbyModelInterface
 {
     public static function collectionName()
     {
@@ -42,4 +42,33 @@ class JobbyModel extends ActiveRecord
             'output',
         ];
     }
-} 
+
+    public static function findAllToRun()
+    {
+        $query = [
+            'enabled' => true,
+            'host' => ['$in' => ['', gethostname()]],
+        ];
+        return static::findAll($query);
+    }
+
+    public function getJobbyCommand()
+    {
+        return (string) $this->command;
+    }
+
+    public function getJobbySchedule()
+    {
+        return (string) $this->schedule;
+    }
+
+    public function getJobbyOutput()
+    {
+        return (string) $this->output;
+    }
+
+    public function getJobbyEnabled()
+    {
+        return (bool) $this->enabled;
+    }
+}

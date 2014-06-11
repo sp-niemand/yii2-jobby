@@ -19,8 +19,10 @@
     },
     "require": {
         "php": ">=5.4",
-        "hellogerard/jobby" : "dev-master",
-        "yiisoft/yii2-mongodb": "*"
+        "hellogerard/jobby" : "dev-master"
+    },
+    "suggest": {
+        "yiisoft/yii2-mongodb": "Needed to use default Jobby DB model implementation"
     },
     "autoload": {
         "psr-4": { "jobbyDb\\": "src/" }

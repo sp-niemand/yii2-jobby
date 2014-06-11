@@ -23,6 +23,6 @@
         "yiisoft/yii2-mongodb": "*"
     },
     "autoload": {
-        "psr-4": { "jobbyii\\": "src/" }
+        "psr-4": { "jobbyDb\\": "src/" }
     }
 }

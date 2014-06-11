@@ -2,26 +2,26 @@
 /**
  * Class JobbyController
  *
- * @package MGC\Core\General\Jobby
- * @author Dmitri Cherepovski <dmitrij.cherepovskij@murka.com>
+ * @package jobbyDb
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
  */
-namespace MGC\Core\General\Jobby;
+namespace jobbyDb;
 
 use Jobby\Jobby;
 use yii\console\Controller;
 
 /**
- * Контроллер планировщика Jobby
+ * Jobby scheduler controller
  *
- * @package MGC\Core\General\Jobby
- * @author Dmitri Cherepovski <dmitrij.cherepovskij@murka.com>
+ * @package jobbyDb
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
  */
 class JobbyController extends Controller
 {
     public $defaultAction = 'run';
 
     /**
-     * Запускает точку входа Jobby
+     * Jobby scheduler entry point
      */
     public function actionRun()
     {

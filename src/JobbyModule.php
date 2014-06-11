@@ -2,21 +2,28 @@
 /**
  * Class JobbyModule
  *
- * @package MGC\Core\General\Jobby
- * @author Dmitri Cherepovski <dmitrij.cherepovskij@murka.com>
+ * @package jobbyDb
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
  */
-namespace MGC\Core\General\Jobby;
+namespace jobbyDb;
 
 use yii\base\Module;
 
 /**
- * Class JobbyModule
+ * Package module class
  *
- * @package MGC\Core\General\Jobby
- * @author Dmitri Cherepovski <dmitrij.cherepovskij@murka.com>
+ * @package jobbyDb
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
  */
 class JobbyModule extends Module
 {
-    public $controllerNamespace = '\MGC\Core\General\Jobby';
+    public $controllerNamespace = '';
     public $defaultRoute = 'jobby';
-} 
+    public $modelClass;
+
+    public function init()
+    {
+        parent::init();
+        $this->modelClass = JobbyModel::className();
+    }
+}

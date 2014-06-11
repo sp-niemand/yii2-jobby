@@ -20,7 +20,7 @@
     "require": {
         "php": ">=5.4",
         "hellogerard/jobby" : "dev-master",
-        "yiisoft/yii2-mongodb": "*",
+        "yiisoft/yii2-mongodb": "*"
     },
     "autoload": {
         "psr-4": { "jobbyii\\": "src/" }

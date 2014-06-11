@@ -17,7 +17,7 @@ use yii\base\Module;
  */
 class JobbyModule extends Module
 {
-    public $controllerNamespace = '';
+    public $controllerNamespace = '\\jobbyDb';
     public $defaultRoute = 'jobby';
     public $modelClass;
 

@@ -27,7 +27,6 @@ class JobbyController extends Controller
     public function actionRun()
     {
         $jobby = new Jobby();
-
         $modelClass = $this->module->modelClass;
         /** @var JobbyModelInterface $modelClass */
         $tasks = $modelClass::findAllToRun();

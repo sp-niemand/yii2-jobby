@@ -18,6 +18,8 @@ use yii\base\Module;
  */
 class JobbyModule extends Module
 {
+    const MODEL_INTERFACE = '\jobbyDb\model\JobbyModelInterface';
+
     public $controllerNamespace = '\jobbyDb\controller';
     public $defaultRoute = 'jobby';
 
@@ -30,7 +32,13 @@ class JobbyModule extends Module
     public function init()
     {
         parent::init();
-        if (! $this->modelClass) {
+        if ($this->modelClass) {
+            if (! is_subclass_of($this->modelClass, self::MODEL_INTERFACE)) {
+                $interface = self::MODEL_INTERFACE;
+                echo "Jobby task model class given in \"{$this->id}\" must implement {$interface}!\n";
+                \Yii::$app->end(1);
+            }
+        } else {
             $this->modelClass = MongoDbModel::className();
         }
     }

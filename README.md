@@ -24,7 +24,7 @@ Add `<projectPath>/yii jobby` to your scheduler configuration. For example, _cro
 
         * * * * * /var/www/project/yii jobby
 
-Now you can use `jobby` Mongo collection to schedule tasks for your project.
+Now you can use `jobby` SQL table in MySQL or something similar to configure and schedule tasks.
 
 Advanced usage
 --------------

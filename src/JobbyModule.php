@@ -7,7 +7,8 @@
  */
 namespace jobbyDb;
 
-use jobbyDb\model\MongoDbModel;
+use jobbyDb\model\MongoModel;
+use jobbyDb\model\StandardModel;
 use yii\base\Module;
 
 /**
@@ -18,6 +19,8 @@ use yii\base\Module;
  */
 class JobbyModule extends Module
 {
+    const EXIT_CODE_WRONG_MODEL_CLASS = 1;
+
     const MODEL_INTERFACE = '\jobbyDb\model\JobbyModelInterface';
 
     public $controllerNamespace = '\jobbyDb\controller';
@@ -35,11 +38,11 @@ class JobbyModule extends Module
         if ($this->modelClass) {
             if (! is_subclass_of($this->modelClass, self::MODEL_INTERFACE)) {
                 $interface = self::MODEL_INTERFACE;
-                echo "Jobby task model class given in \"{$this->id}\" must implement {$interface}!\n";
-                \Yii::$app->end(1);
+                echo "Jobby task model class given in \"{$this->id}\" must implement {$interface}.\n";
+                \Yii::$app->end(self::EXIT_CODE_WRONG_MODEL_CLASS);
             }
         } else {
-            $this->modelClass = MongoDbModel::className();
+            $this->modelClass = StandardModel::className();
         }
     }
 }

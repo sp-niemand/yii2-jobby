@@ -7,7 +7,7 @@
  */
 namespace jobbyDb\model;
 
-use MGC\Core\General\ActiveRecord;
+use yii\mongodb\ActiveRecord;
 
 /**
  * Jobby task model for MongoDb
@@ -23,7 +23,7 @@ use MGC\Core\General\ActiveRecord;
  * @property string $command
  * @property string $output
  */
-class MongoDbModel extends ActiveRecord implements JobbyModelInterface
+class MongoModel extends ActiveRecord implements JobbyModelInterface
 {
     public static function collectionName()
     {
@@ -41,15 +41,6 @@ class MongoDbModel extends ActiveRecord implements JobbyModelInterface
             'command',
             'output',
         ];
-    }
-
-    public static function findAllToRun()
-    {
-        $query = [
-            'enabled' => true,
-            'host' => ['$in' => ['', gethostname()]],
-        ];
-        return static::findAll($query);
     }
 
     public function getJobbyCommand()

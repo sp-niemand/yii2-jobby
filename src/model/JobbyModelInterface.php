@@ -19,13 +19,6 @@ use yii\db\ActiveRecordInterface;
 interface JobbyModelInterface extends ActiveRecordInterface
 {
     /**
-     * Returns all the tasks to be executed
-     *
-     * @return JobbyModelInterface[]
-     */
-    public static function findAllToRun();
-
-    /**
      * Returns "command" for Jobby
      *
      * @return string

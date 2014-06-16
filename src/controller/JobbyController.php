@@ -22,14 +22,29 @@ class JobbyController extends Controller
     public $defaultAction = 'run';
 
     /**
+     * Возвращает список задач для загрузки в движок Jobby
+     *
+     * @return JobbyModelInterface[]
+     */
+    private function getTasks()
+    {
+        $modelClass = $this->module->modelClass;
+        /** @var JobbyModelInterface $modelClass */
+        $query = $modelClass::find()
+            ->where(['enabled' => true, 'host' => ['', gethostname()]]);
+        return is_callable([$modelClass, 'getDb'])
+            ? $query->all($modelClass::getDb())
+            : $query->all();
+    }
+
+    /**
      * Jobby scheduler entry point
      */
     public function actionRun()
     {
         $jobby = new Jobby();
-        $modelClass = $this->module->modelClass;
-        /** @var JobbyModelInterface $modelClass */
-        $tasks = $modelClass::findAllToRun();
+        $tasks = $this->getTasks();
+        /** @var JobbyModelInterface[] $tasks */
         foreach ($tasks as $task) {
             $output = $task->getJobbyOutput();
             $jobby->add($task->getPrimaryKey(), [

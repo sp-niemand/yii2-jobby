@@ -18,6 +18,8 @@ use yii\db\ActiveRecord;
  */
 class StandardModel extends ActiveRecord implements JobbyModelInterface
 {
+    protected static $columnsRequired = ['command', 'schedule', 'output', 'enabled', 'host'];
+
     /**
      * @throws \jobbyDb\exception\WrongSchemaException If not all required columns are present in the table
      */
@@ -28,14 +30,16 @@ class StandardModel extends ActiveRecord implements JobbyModelInterface
         // check if all the column names needed are present
         $schema = parent::getTableSchema();
         $columnsPresent = $schema->getColumnNames();
-        $columnsRequired = ['command', 'schedule', 'output', 'enabled'];
-        foreach ($columnsRequired as $required) {
+        foreach (static::$columnsRequired as $required) {
             if (! in_array($required, $columnsPresent)) {
                 throw new WrongSchemaException("No {$required} column found in '{$this->getTableSchema()}''");
             }
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'jobby';

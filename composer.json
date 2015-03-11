@@ -21,6 +21,9 @@
         "php": ">=5.4",
         "hellogerard/jobby" : "dev-master"
     },
+    "require-dev": {
+        "yiisoft/yii2": "~2.0.2"
+    },
     "suggest": {
         "yiisoft/yii2-mongodb": "Needed to use default Jobby DB model implementation"
     },

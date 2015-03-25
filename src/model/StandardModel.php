@@ -40,6 +40,22 @@ class StandardModel extends ActiveRecord implements JobbyModelInterface
     /**
      * @inheritdoc
      */
+    public function rules()
+    {
+        return [
+            ['id', 'integer'],
+            ['schedule', 'required'],
+            ['schedule', 'match', 'pattern' => '~^[\d,\\-*/]+(?:\s+[\d,\\-*/]+){4}$~'],
+            ['command', 'required'],
+            ['output', 'string'],
+            ['enabled', 'boolean'],
+            ['host', 'string'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'jobby';

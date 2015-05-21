@@ -11,6 +11,8 @@ use jobbyDb\model\MongoModel;
 use jobbyDb\model\StandardModel;
 use yii\base\Module;
 
+defined('jobbyDb') || \Yii::setAlias('jobbyDb', __DIR__);
+
 /**
  * Package module class
  *
@@ -23,7 +25,7 @@ class JobbyModule extends Module
 
     const MODEL_INTERFACE = '\jobbyDb\model\JobbyModelInterface';
 
-    public $controllerNamespace = '\jobbyDb\controller';
+    public $controllerNamespace = 'jobbyDb\controller';
     public $defaultRoute = 'jobby';
 
     /** @var string Class of the ActiveRecord model used to hold scheduled tasks */
